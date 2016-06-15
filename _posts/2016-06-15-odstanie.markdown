@@ -25,7 +25,7 @@ Jakie są powody takiego stanu rzeczy? Pokuszę się o nazwanie dwóch z nich.
 Po pierwsze i oczywiste - *wyższe zarobki*. Na Wykopie dalej funkcjonuje mit
 programisty, który zarabia piętnaście tysięcy. Nie jest to pewnie średnia zarobków, ale
 jednak trudno się oszukiwać, że programista musi wiązać dziś koniec z końcem.
-Ludzie z poza branży wydają się ten fakt dostrzegać, popularne staje się przebranżawianie
+Ludzie spoza branży wydają się ten fakt dostrzegać, popularne staje się przebranżawianie
 na programistę.
 
 Są przecież grupy, które nawet bardziej **odstają** zarobkami - lekarze, prawnicy i menadżerowie.
