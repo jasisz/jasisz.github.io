@@ -35,10 +35,10 @@ A jeżeli tego nie robią, to i tak często są bliżej ludzi, niż ktoś, kogo 
 zajęciem jest rozwiązywanie abstrakcyjnych problemów i siedzenie przed klawiaturą.
 
 I to sprowadza nas do drugiej przyczyny. Programiści rozwiązują **abstrakcyjne problemy**,
-przypominają odrobinę naukowców, ale od tych z kolei różnią się właśnie zarobkami.
+przypominają odrobinę naukowców.
 O ile naukowiec często z przymusu musi zmagać się albo z nie najwyższymi zarobkami
 i zwykłymi codziennymi problemami, albo przynajmniej z biurokratyczną machiną uczelni
-lub studentami.
+lub studentami, o tyle programista często żyje zamknięty w złotej klatce.
 
 Co łączy te dwa punkty? Oczywiście odcięcie od problemów reszty społeczeństwa.
 Nie jest ono drastyczne, wszak programiści mają rodziców, rodzeństwo, znajomych czy żony,
