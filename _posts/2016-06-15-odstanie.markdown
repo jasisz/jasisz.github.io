@@ -1,0 +1,97 @@
+---
+layout: post
+title:  "Odstanie"
+date:   2016-06-15 21:26:15 +0200
+---
+Mam ostatnio rozkminę na temat pewnego zjawiska, które roboczo nazwałem sobie *odstaniem*.
+Może nie jest to nawet zjawisko do końca prawdziwe i - paradoksalnie - sam fakt, że je obserwuję
+świadczy o tym, że sam jestem jego częścią.
+
+Ale do rzeczy. W telegraficznym skrócie chodzi o to, że **pewne zawody odkleiły się od realiów**.
+Mówiąc *zawody* mam tu oczywiście na myśli **programistów**, bo z nimi mam najwięcej do czynienia.
+Mówiąc natomiast *realia* mam na myśli resztę społeczeństwa, ich problemy, wyzwania i sposób
+życia.
+
+Proszę mi też wybaczyć wszelkie generalizacje, od których będzie roił się ten wpis.
+Nie mam twardych dowodów, są to luźne obserwacje, nie twierdzę że wszyscy programiści są jacyś,
+chcę tylko pokazać pewien trend. Jeżeli kogoś bardzo to gryzie, niech podmieni sobie w tym
+wpisie *programiści* na moje imię i nazwisko. Czasem zamiast *programiści* będę pisać *my*.
+
+Skąd się to bierze?
+-------------------
+
+Jakie są powody takiego stanu rzeczy? Pokuszę się o nazwanie dwóch z nich.
+
+Po pierwsze i oczywiste - *wyższe zarobki*. Na Wykopie dalej funkcjonuje mit
+programisty, który zarabia piętnaście tysięcy. Nie jest to pewnie średnia zarobków, ale
+jednak trudno się oszukiwać, że programista musi wiązać dziś koniec z końcem.
+Ludzie z poza branży wydają się ten fakt dostrzegać, popularne staje się przebranżawianie
+na programistę.
+
+Są przecież grupy, które nawet bardziej **odstają** zarobkami - lekarze, prawnicy i menadżerowie.
+Jest jednak podstawowa różnica - ci ludzie zawodowo obcują w pracy z innymi ludźmi i ich
+problemami. Leczą ich, udzielają porad prawnych, rozwiązują problemy swoich zespołów.
+A jeżeli tego nie robią, to i tak często są bliżej ludzi, niż ktoś, kogo głównym
+zajęciem jest rozwiązywanie abstrakcyjnych problemów i siedzenie przed klawiaturą.
+
+I to sprowadza nas do drugiej przyczyny. Programiści rozwiązują **abstrakcyjne problemy**,
+przypominają odrobinę naukowców, ale od tych z kolei różnią się właśnie zarobkami.
+O ile naukowiec często z przymusu musi zmagać się albo z nie najwyższymi zarobkami
+i zwykłymi codziennymi problemami, albo przynajmniej z biurokratyczną machiną uczelni
+lub studentami.
+
+Co łączy te dwa punkty? Oczywiście odcięcie od problemów reszty społeczeństwa.
+Nie jest ono drastyczne, wszak programiści mają rodziców, rodzeństwo, znajomych czy żony,
+nie jest całkowite, dlatego właśnie proponuję termin *odstanie*.
+
+Do czego to prowadzi?
+---------------------
+
+Nie chcę się rozwodzić na temat tego co się z programistami stanie, kiedy raptem okażą się
+niepotrzebni. Temat pewnie ciekawy, ale jednak nie na ten wpis.
+
+Wydaje mi się, że wielu programistów przecenia swoje możliwości. Wydaje się im, że skoro
+dobrze zarabiają i dobrze radzą sobie w pracy, to będą równie dobrze prowadzić samochody,
+rozkręcać biznesy czy robić cokolwiek innego. I często robią! Często wybierają sobie
+konkretne dziedziny, w których też dążą do perfekcji. Wielu znanych mi programistów
+przedstawia się wręcz jako na przykład "programista, tancerz".
+
+Ale nie znaczy to oczywiście, że czegokolwiek programista się tknie, zaraz zamieni
+się w złoto. Owo *odstanie* sprawia, że niektóre problemy mogą być dla programistów
+trudniejsze niż dla innych ludzi.
+
+Trudno rozkręcić biznes, nie znając problemów ludzi. Biznes to w końcu rozwiązywanie
+problemów za opłatą. Sklep to nic innego jak rozwiązanie problemu dostaw żywności.
+Skoro nie znamy problemów, nie możemy też ich rozwiązywać. Najlepiej znamy nasze problemy
+i je rozwiązujemy, tworzymy kolejne narzędzia do użytku dla innych programistów.
+Pisałem o tym w poprzednim wpisie - gros startupów rozwiązuje problemy innych startupów.
+
+Gdy masz młotek, wszystko dookoła wyglada jak gwóźdź.
+Nawet kiedy znajdzie się konkretny problem, to jego rozwiązanie po prostu nie zawsze
+jest abstrakcyjne, nie zawsze sam problem da się zamknąć w obiektach, a rozwiązanie
+zapisać za pomocą algorytmu. A takich rozwiązań skłonni są szukać programiści.
+Koronnym przykładem jest dla mnie **bitcoin**. Idea jest szczytna, ale rozwiązanie
+tego problemu algorytmem prowadzi do tego, że ani prosty człowiek nie jest w stanie
+idei bitcoina pojąć, ani nawet w łatwy sposób bitcoinem zapłacić. Nie mówiąc już
+o tym ile ton dwutlenku węgla poszło do atmosfery tylko po to, żeby kopać bitcoiny.
+
+Co gorsza - czasem wynajduje się problemy pod gotowe rozwiązania.
+Rozumiem, że często są to po prostu pola testowe dla algorytmów, ale czy naprawdę
+fakt, że Google jest w stanie wyszukać wśród twoich zdjęć te, na których jest
+jezioro, rozwiązuje jakiś ważki problem? Ponoć kiedy Uber zaczynał w Warszawie,
+to jego statystycznym pasażerem był trzydziestoletni programista.
+
+Wreszcie z braku problemów wymyśla się lub wręcz importuje nowe problemy, albo przynajmniej
+wyolbrzymia się jakieś sprawy, aby urosły do rangi problemów. Programiści przyzwyczajeni są
+do kłótni na zupełnie nieistotne tematy w stylu czy należy używać tabulatorów czy spacji,
+albo świętych wojen o to jaki edytor tekstu jest najlepszy.
+Konferencje dla programistów coraz częściej mają całe panele tzw. *miękkich talków*
+o wykluczeniu, zarządzaniu projektami (najlepiej agile!), zdrowiu psychicznym, komunikacji,
+czy też społeczności samej w sobie.
+Nie twierdzę, że to coś zdrożnego (bo sam wolę czasem pójść na takie wystąpienie niż
+coś mocno technicznego), ale znowu chcę pokazać pewien trend.
+
+Co z tym zrobić?
+----------------
+
+Czy naprawdę po poprzednim rozdziale ktoś się spodziewał, że podam tutaj receptę?
