@@ -79,7 +79,7 @@ Co gorsza - czasem wynajduje się problemy pod gotowe rozwiązania.
 Rozumiem, że często są to po prostu pola testowe dla algorytmów, ale czy naprawdę
 fakt, że Google jest w stanie wyszukać wśród twoich zdjęć te, na których jest
 jezioro, rozwiązuje jakiś ważki problem? Ponoć kiedy Uber zaczynał w Warszawie,
-to jego statystycznym pasażerem był trzydziestoletni programista.śś
+to jego statystycznym pasażerem był trzydziestoletni programista.
 
 Wreszcie z braku problemów wymyśla się lub wręcz importuje nowe problemy, albo przynajmniej
 wyolbrzymia się jakieś sprawy, aby urosły do rangi problemów. Programiści przyzwyczajeni są
