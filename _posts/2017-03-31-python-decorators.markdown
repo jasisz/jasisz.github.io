@@ -72,8 +72,8 @@ Let combine this idea with the fact that function can be passed as an argument.
     print(greet_combined_names('John', 'Doe'))
 
 
-Decoratos finally!
-------------------
+Decorators finally!
+-------------------
 
 If you've ever heard of *decorators* and maybe (just as I was!) you are a little scared of them, this mind be the way to understand them. Decorators are just functions _wrapping_ other functions, that is all.
 
