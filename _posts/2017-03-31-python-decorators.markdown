@@ -93,7 +93,7 @@ You can just do:
         return '{} {}'.format(first_name, last_name)
 
 But let us take a step further. What if we want to make our greeting more customisable, e.g. provide us with a word used to greet.
-Nowing what we know I would probably start with something like:
+Knowing what we know I would probably start with something like:
 
     def greeting_helper_with_word(word, func):
     
@@ -149,3 +149,7 @@ Do not worry, Python regular args and kwargs comes to the rescue!
         return actual_decorator
 
 Such a decorator can be finally used to decorate any function or even a class method.
+
+
+rynsztok danych - kafka
+jezioro danych - 
