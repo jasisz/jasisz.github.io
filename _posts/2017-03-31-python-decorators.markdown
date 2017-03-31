@@ -149,7 +149,3 @@ Do not worry, Python regular args and kwargs comes to the rescue!
         return actual_decorator
 
 Such a decorator can be finally used to decorate any function or even a class method.
-
-
-rynsztok danych - kafka
-jezioro danych - 
