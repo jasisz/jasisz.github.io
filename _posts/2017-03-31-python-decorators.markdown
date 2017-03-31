@@ -54,7 +54,7 @@ And what is even more interesting is that you can also create a function returni
 
 As you can see the inner function has access to the scope of the outer function. It is really useful thing and it got its own name - _closure_, but do not worry with names, because the concept is very simple.
 
-Let combine this idea with the fact that function can be passed as an argument.
+Let combine this idea with the fact that a function can be passed as an argument.
 
     def greeting_helper(func):
     
@@ -134,7 +134,7 @@ That is it! We've assigned returned function to `ola_decorator`, but we do not r
     def greet_combined_names(first_name, last_name):
         return '{} {}'.format(first_name, last_name)
 
-The last thing is that often we do not know what exact parameters the function might require, but we want to write a decorator that is compatible with any function. Maybe it is even not a simple function, but the method of some class and it just requires `self` as first parameter?
+The last thing is that often we do not know what exact parameters the function might require, but we want to write a decorator that is compatible with any function. Maybe it is even not a simple function, but the method of some class and it just requires `self` as the first parameter?
 Do not worry, Python regular args and kwargs comes to the rescue!
 
     def greeting_helper_with_word(word):
