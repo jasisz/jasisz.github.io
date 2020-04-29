@@ -6,9 +6,9 @@ date:   2020-04-29 23:16:15 +0100
 
 TLDR: Odradzam instalowanie aplikacji ProteGO Safe i innych aplikacji służących do śledzenia kontaktów w bieżącej ich formie.
 
-# Co jest nie tak z ProteGO?
+## Co jest nie tak z ProteGO?
 
-## Proces tworzenia
+### Proces tworzenia
 Od pierwszego dnia kiedy otwarty kod pojawił się na GitHub przyglądałem się temu projektowi i brałem aktywny
 udział w dyskusjach o tym jak mogłaby wyglądać taka aplikacja, która byłaby możliwie bezpieczna i szanowała prywatność
 użytkowników. Z kuriozalnych aspektów - musiałem podpisać oświadczenie dla Ministerstwa Cyfryzacji o licencji kodu
@@ -36,7 +36,7 @@ Aplikacje takie mogą zostać przez system operacyjny zwyczajnie zamknięte, kie
 Nie jestem specjalistą od aplikacji mobilnych, ale sama implementacja Bluetooth jest podatna na ataki, które muszą
 najpierw zostać załatane. Tylko twórcy systemów i telefonów są w stanie poradzić sobie z tymi problemami.
 
-# Co jest nie tak z rozwiązaniem Google i Apple?
+## Co jest nie tak z rozwiązaniem Google i Apple?
 
 To, że robi je Google i Apple. Brzmi kuriozalnie, bo przecież wcześniej narzekałem, że bez nich się nie da, ale już
 spieszę z wyjaśnieniami.
