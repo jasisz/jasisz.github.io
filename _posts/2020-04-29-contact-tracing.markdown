@@ -8,7 +8,7 @@ TLDR: Odradzam instalowanie aplikacji ProteGO Safe i innych aplikacji służący
 
 ## Co jest nie tak z ProteGO?
 
-Od pierwszego dnia kiedy otwarty kod pojawił się na GitHub przyglądałem się temu projektowi i brałem aktywny
+Od pierwszego dnia kiedy [otwarty kod pojawił się na GitHub](https://github.com/ProteGO-Safe) przyglądałem się temu projektowi i brałem aktywny
 udział w dyskusjach o tym jak mogłaby wyglądać taka aplikacja, która byłaby możliwie bezpieczna i szanowała prywatność
 użytkowników. Z kuriozalnych aspektów - musiałem podpisać oświadczenie dla Ministerstwa Cyfryzacji o licencji kodu
 i podpisać je profilem zaufanym. Potem dostałem podziękowania, w których pojawiła sie pełna lista e-maili osób, które
