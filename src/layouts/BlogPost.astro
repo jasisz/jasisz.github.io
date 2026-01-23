@@ -12,48 +12,30 @@ interface Props {
 const { title, date, lang = 'pl', status = 'evergreen', topic } = Astro.props;
 const formattedDate = date.toISOString().split('T')[0];
 
-const i18n = {
-  pl: {
-    seed: { icon: '🌱', label: 'ziarno', desc: 'świeża myśl, dopiero kiełkuje' },
-    growing: { icon: '🌿', label: 'rośnie', desc: 'rozwijana, jeszcze nie gotowa' },
-    evergreen: { icon: '🌲', label: 'dojrzała', desc: 'pielęgnowana notatka' },
-    planted: 'posadzone',
-    backToGarden: '← wróć do ogrodu',
-  },
-  en: {
-    seed: { icon: '🌱', label: 'seed', desc: 'fresh thought, just sprouting' },
-    growing: { icon: '🌿', label: 'growing', desc: 'developing, not ready yet' },
-    evergreen: { icon: '🌲', label: 'evergreen', desc: 'well-tended note' },
-    planted: 'planted',
-    backToGarden: '← back to garden',
-  },
+const statusLabels = {
+  pl: { seed: 'szkic', growing: 'w trakcie', evergreen: '' },
+  en: { seed: 'draft', growing: 'in progress', evergreen: '' },
 };
 
-const t = i18n[lang as keyof typeof i18n] || i18n.pl;
-const currentStatus = t[status];
+const labels = statusLabels[lang as keyof typeof statusLabels] || statusLabels.pl;
+const statusLabel = labels[status];
+const backLabel = lang === 'en' ? '← back' : '← wróć';
 ---
 
 <BaseLayout title={title} lang={lang}>
   <article class="post" lang={lang}>
     <header class="post-header">
-      <div class="post-meta-top">
+      <div class="post-meta">
         {topic && (
-          <a class="post-topic" href={`/${topic.replace('ś', 's').replace('ę', 'e')}`}>← {topic}</a>
+          <a class="post-topic" href={`/${topic.replace('ś', 's').replace('ę', 'e')}`}>{topic}</a>
         )}
+        {topic && <span class="meta-sep">·</span>}
+        <time class="post-date" datetime={date.toISOString()}>{formattedDate}</time>
+        {statusLabel && <span class="post-status">{statusLabel}</span>}
+        {lang === 'en' && <span class="post-lang">EN</span>}
       </div>
 
       <h1 class="post-title">{title}</h1>
-
-      <div class="post-garden-meta">
-        <span class="post-status" title={currentStatus.desc}>
-          <span class="status-icon">{currentStatus.icon}</span>
-          <span class="status-label">{currentStatus.label}</span>
-        </span>
-        <span class="meta-separator">·</span>
-        <time class="post-date" datetime={date.toISOString()}>
-          {t.planted} {formattedDate}
-        </time>
-      </div>
     </header>
 
     <div class="post-content">
@@ -61,7 +43,7 @@ const currentStatus = t[status];
     </div>
 
     <footer class="post-footer">
-      <a href="/" class="back-to-garden">{t.backToGarden}</a>
+      <a href="/" class="back-link">{backLabel}</a>
     </footer>
   </article>
 </BaseLayout>
@@ -73,16 +55,18 @@ const currentStatus = t[status];
 
   .post-header {
     margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px dashed var(--grey-color-light);
   }
 
-  .post-meta-top {
-    margin-bottom: 1rem;
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--grey-color);
+    margin-bottom: 0.75rem;
   }
 
   .post-topic {
-    font-size: 0.85rem;
     color: var(--grey-color);
     text-decoration: none;
   }
@@ -91,47 +75,36 @@ const currentStatus = t[status];
     color: var(--brand-color);
   }
 
+  .meta-sep {
+    color: var(--grey-color-light);
+  }
+
+  .post-date {
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .post-status {
+    font-size: 0.75rem;
+    padding: 0.15rem 0.5rem;
+    background: var(--grey-color-light);
+    border-radius: 3px;
+    color: var(--grey-color);
+  }
+
+  .post-lang {
+    font-size: 0.7rem;
+    padding: 0.1rem 0.4rem;
+    background: var(--grey-color-light);
+    border-radius: 3px;
+  }
+
   .post-title {
     font-family: Georgia, "Times New Roman", serif;
     font-size: 2rem;
     font-weight: 400;
     line-height: 1.25;
-    margin-bottom: 1rem;
+    margin: 0;
     color: var(--text-color);
-  }
-
-  .post-garden-meta {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    flex-wrap: wrap;
-    font-size: 0.9rem;
-    color: var(--grey-color);
-  }
-
-  .post-status {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    padding: 0.25rem 0.6rem;
-    background: rgba(107, 124, 94, 0.1);
-    border-radius: 12px;
-  }
-
-  .status-icon {
-    font-size: 0.9rem;
-  }
-
-  .status-label {
-    font-size: 0.8rem;
-  }
-
-  .meta-separator {
-    color: var(--grey-color-light);
-  }
-
-  .post-date {
-    font-style: italic;
   }
 
   .post-content {
@@ -140,15 +113,16 @@ const currentStatus = t[status];
 
   .post-footer {
     padding-top: 1.5rem;
-    border-top: 1px dashed var(--grey-color-light);
+    border-top: 1px solid var(--grey-color-light);
   }
 
-  .back-to-garden {
+  .back-link {
     font-size: 0.9rem;
     color: var(--grey-color);
+    text-decoration: none;
   }
 
-  .back-to-garden:hover {
+  .back-link:hover {
     color: var(--brand-color);
   }
 

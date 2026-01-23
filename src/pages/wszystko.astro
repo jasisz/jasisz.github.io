@@ -8,96 +8,125 @@ const kod = (await getCollection('kod')).map(p => ({ ...p, topic: 'kod' }));
 const posts = [...przemyslenia, ...kod].sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
-
-const statusIcons = { seed: '🌱', growing: '🌿', evergreen: '🌲' };
 ---
 
 <BaseLayout title="wszystko">
-  <div class="all-page">
-    <h1 class="page-title">wszystko</h1>
+  <div class="page">
+    <header class="page-header">
+      <h1 class="page-title">wszystko</h1>
+      <p class="page-desc">{posts.length} zapisków</p>
+    </header>
 
-    <ul class="notes">
+    <div class="posts-list">
       {posts.map((post) => (
-        <li>
-          <a class="note" href={`/${post.slug}`}>
-            <span class="note-status">{statusIcons[post.data.status]}</span>
-            <span class="note-title">{post.data.title}</span>
-            {post.data.lang === 'en' && <span class="note-lang">🇬🇧</span>}
-            <span class="note-topic">{post.topic}</span>
-          </a>
-        </li>
+        <a class="post-item" href={`/${post.slug}`}>
+          <time class="post-date">{post.data.date.toISOString().split('T')[0]}</time>
+          <span class="post-title">{post.data.title}</span>
+          {post.data.lang === 'en' && <span class="post-lang">EN</span>}
+          <span class="post-topic">{post.topic}</span>
+        </a>
       ))}
-    </ul>
+    </div>
 
-    <a class="back-link" href="/">← wróć do ogrodu</a>
+    <a class="back-link" href="/">← wróć</a>
   </div>
 </BaseLayout>
 
 <style>
-  .all-page {
+  .page {
     padding: 2rem 0;
+  }
+
+  .page-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--grey-color-light);
   }
 
   .page-title {
     font-family: Georgia, "Times New Roman", serif;
     font-size: 1.5rem;
     font-weight: 400;
-    margin-bottom: 2rem;
+    margin: 0 0 0.25rem 0;
   }
 
-  .notes {
-    list-style: none;
-    margin: 0 0 2rem 0;
-    padding: 0;
+  .page-desc {
+    font-size: 0.9rem;
+    color: var(--grey-color);
+    margin: 0;
+  }
+
+  .posts-list {
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
+    margin-bottom: 2.5rem;
   }
 
-  .note {
+  .post-item {
     display: flex;
     align-items: baseline;
-    gap: 0.6rem;
+    gap: 1rem;
     text-decoration: none;
     color: inherit;
   }
 
-  .note:hover {
-    text-decoration: none;
+  .post-item:hover .post-title {
+    color: var(--brand-color);
   }
 
-  .note-status {
-    font-size: 0.9rem;
+  .post-date {
+    font-size: 0.8rem;
+    color: var(--grey-color);
+    font-family: -apple-system, BlinkMacSystemFont, monospace;
     flex-shrink: 0;
   }
 
-  .note-title {
+  .post-title {
     font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.1rem;
-    color: var(--text-color);
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.15s ease;
+    font-size: 1rem;
+    transition: color 0.15s ease;
   }
 
-  .note:hover .note-title {
-    border-bottom-color: var(--brand-color);
+  .post-lang {
+    font-size: 0.65rem;
+    padding: 0.1rem 0.35rem;
+    background: var(--grey-color-light);
+    border-radius: 3px;
+    color: var(--grey-color);
   }
 
-  .note-topic {
+  .post-topic {
     font-size: 0.8rem;
     color: var(--grey-color);
-    background: var(--grey-color-light);
-    padding: 0.1rem 0.5rem;
-    border-radius: 8px;
     margin-left: auto;
   }
 
   .back-link {
+    display: inline-block;
     font-size: 0.9rem;
     color: var(--grey-color);
+    text-decoration: none;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--grey-color-light);
   }
 
   .back-link:hover {
     color: var(--brand-color);
+  }
+
+  @media (max-width: 600px) {
+    .post-item {
+      flex-wrap: wrap;
+      gap: 0.25rem 0.5rem;
+    }
+
+    .post-date {
+      width: 100%;
+    }
+
+    .post-topic {
+      margin-left: 0;
+    }
   }
 </style>

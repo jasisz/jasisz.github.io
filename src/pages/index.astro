@@ -10,92 +10,71 @@ const recentPosts = [...allPosts]
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0, 3);
 
-const topics = [
-  { name: 'przemyślenia', slug: 'przemyslenia', icon: '💭', count: przemyslenia.length },
-  { name: 'kod', slug: 'kod', icon: '💻', count: kod.length },
+const paths = [
+  { name: 'przemyślenia', slug: 'przemyslenia', count: przemyslenia.length },
+  { name: 'kod', slug: 'kod', count: kod.length },
 ];
-
-const statusIcons = { seed: '🌱', growing: '🌿', evergreen: '🌲' };
 ---
 
 <BaseLayout title="jasisz">
-  <div class="garden">
-    <header class="welcome">
-      <h1 class="welcome-title">Cyfrowy ogród</h1>
-      <p class="welcome-text">
-        Miejsce, gdzie sadzę i pielęgnuję myśli. Niektóre dopiero kiełkują
-        <span class="status-hint">🌱</span>, inne wciąż rosną
-        <span class="status-hint">🌿</span>, a jeszcze inne są już dojrzałe
-        <span class="status-hint">🌲</span>.
+  <div class="home">
+    <header class="intro">
+      <p class="intro-text">
+        Zbiór zapisków o technologii, programowaniu i rzeczach, które mnie interesują.
+        Możesz tu swobodnie błądzić między tematami.
       </p>
     </header>
 
     <section class="section">
-      <h2 class="section-title">Ostatnio sadzone</h2>
-      <ul class="recent-notes">
+      <h2 class="section-title">Ostatnie</h2>
+      <div class="posts-list">
         {recentPosts.map((post) => (
-          <li>
-            <a class="note-link" href={`/${post.slug}`}>
-              <span class="note-status">{statusIcons[post.data.status]}</span>
-              <span class="note-title">{post.data.title}</span>
-              {post.data.lang === 'en' && <span class="note-lang">🇬🇧</span>}
-            </a>
-          </li>
+          <a class="post-item" href={`/${post.slug}`}>
+            <div class="post-meta">
+              <span class="post-topic">{post.topic}</span>
+              {post.data.lang === 'en' && <span class="post-lang">EN</span>}
+              <time class="post-date">{post.data.date.toISOString().split('T')[0]}</time>
+            </div>
+            <h3 class="post-title">{post.data.title}</h3>
+          </a>
         ))}
-      </ul>
+      </div>
     </section>
 
     <section class="section">
-      <h2 class="section-title">Ścieżki w ogrodzie</h2>
-      <ul class="paths">
-        {topics.map((topic) => (
-          <li>
-            <a class="path-link" href={`/${topic.slug}`}>
-              <span class="path-icon">{topic.icon}</span>
-              <span class="path-name">{topic.name}</span>
-              <span class="path-count">{topic.count}</span>
-            </a>
-          </li>
+      <h2 class="section-title">Ścieżki</h2>
+      <nav class="paths">
+        {paths.map((path) => (
+          <a class="path" href={`/${path.slug}`}>
+            {path.name} <span class="path-count">({path.count})</span>
+          </a>
         ))}
-      </ul>
+        <a class="path" href="/wszystko">
+          wszystko <span class="path-count">({allPosts.length})</span>
+        </a>
+        <span class="path-sep">·</span>
+        <a class="path path--random" href="/losowa">
+          losowa →
+        </a>
+      </nav>
     </section>
-
-    <nav class="garden-nav">
-      <a href="/wszystko">wszystko</a>
-      <span class="nav-sep">·</span>
-      <a href="/losowa" class="random-link">🎲 losowa</a>
-    </nav>
   </div>
 </BaseLayout>
 
 <style>
-  .garden {
-    padding: 2.5rem 0;
+  .home {
+    padding: 2rem 0;
   }
 
-  .welcome {
+  .intro {
     margin-bottom: 3rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px dashed var(--grey-color-light);
   }
 
-  .welcome-title {
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.75rem;
-    font-weight: 400;
-    margin-bottom: 0.75rem;
-    color: var(--brand-color);
-  }
-
-  .welcome-text {
-    font-size: 1.05rem;
+  .intro-text {
+    font-size: 1.1rem;
     line-height: 1.7;
     color: var(--text-color);
-    max-width: 480px;
-  }
-
-  .status-hint {
-    font-size: 0.95rem;
+    max-width: 540px;
   }
 
   .section {
@@ -108,102 +87,93 @@ const statusIcons = { seed: '🌱', growing: '🌿', evergreen: '🌲' };
     font-weight: 400;
     color: var(--grey-color);
     text-transform: lowercase;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.05em;
     margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--grey-color-light);
   }
 
-  .recent-notes {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  /* Posts list */
+  .posts-list {
     display: flex;
     flex-direction: column;
-    gap: 0.65rem;
+    gap: 1.25rem;
   }
 
-  .note-link {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 0.5rem;
+  .post-item {
     text-decoration: none;
     color: inherit;
   }
 
-  .note-status {
-    font-size: 0.9rem;
-  }
-
-  .note-title {
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.1rem;
-    color: var(--text-color);
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.15s ease;
-  }
-
-  .note-link:hover .note-title {
-    border-bottom-color: var(--brand-color);
-  }
-
-  .paths {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-  }
-
-  .path-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.5rem 0.9rem;
-    border-radius: 20px;
-    text-decoration: none;
-    color: inherit;
-    background: rgba(107, 124, 94, 0.08);
-    transition: all 0.15s ease;
-  }
-
-  .path-link:hover {
-    background: rgba(107, 124, 94, 0.15);
-    text-decoration: none;
-  }
-
-  .path-icon {
-    font-size: 1rem;
-  }
-
-  .path-name {
-    font-size: 0.95rem;
-    color: var(--text-color);
-  }
-
-  .path-count {
-    font-size: 0.8rem;
-    color: var(--grey-color);
-  }
-
-  .garden-nav {
-    padding-top: 1rem;
-    border-top: 1px dashed var(--grey-color-light);
-  }
-
-  .garden-nav a {
-    font-size: 0.9rem;
-    color: var(--grey-color);
-  }
-
-  .garden-nav a:hover {
+  .post-item:hover .post-title {
     color: var(--brand-color);
   }
 
-  .nav-sep {
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--grey-color);
+    margin-bottom: 0.25rem;
+  }
+
+  .post-topic {
+    text-transform: lowercase;
+  }
+
+  .post-lang {
+    font-size: 0.7rem;
+    padding: 0.1rem 0.4rem;
+    background: var(--grey-color-light);
+    border-radius: 3px;
+  }
+
+  .post-date {
+    margin-left: auto;
+  }
+
+  .post-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    margin: 0;
+    transition: color 0.15s ease;
+  }
+
+  /* Paths */
+  .paths {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1.25rem;
+  }
+
+  .path {
+    font-size: 0.95rem;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .path:hover {
+    color: var(--brand-color);
+    text-decoration: none;
+  }
+
+  .path-count {
+    color: var(--grey-color);
+  }
+
+  .path-sep {
     color: var(--grey-color-light);
   }
 
-  .random-link {
+  .path--random {
+    color: var(--grey-color);
+  }
+
+  .path--random:hover {
     color: var(--brand-color);
   }
 </style>
