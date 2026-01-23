@@ -1,8 +1,9 @@
 ---
-layout: post
-title:  "Internetowy luddyzm, czyli początek"
-date:   2016-04-18 19:42:48 +0200
+title: "Internetowy luddyzm, czyli początek"
+date: 2016-04-18
+lang: pl
 ---
+
 Miałem już kiedyś [bloga][blog], a nawet miałem ich kilka. Bez żadnej przesady można powiedzieć, że bloguję już ponad dekadę, spuszczając zasłonę milczenia na kilkuletnie często przerwy.
 
 Ostatnio porzuciłem blogowanie głównie na rzecz facebooka. Pojawiały się na nim wpisy, które z powodzeniem można było rozwinąć do normalnych wpisów blogowych. Ale facebook to facebook, tam trzeba uchwycić uwagę w trzech słowach, zainteresować znudzonego przewijacza, a dopiero przyszpiliwszy jego uwagę pozwolić można sobie na coś więcej.

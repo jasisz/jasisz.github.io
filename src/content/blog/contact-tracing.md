@@ -1,7 +1,7 @@
 ---
-layout: post
-title:  "Dlaczego nie piszę się na Contact Tracing"
-date:   2020-04-29 23:16:15 +0100
+title: "Dlaczego nie piszę się na Contact Tracing"
+date: 2020-04-29
+lang: pl
 ---
 
 TLDR: Odradzam instalowanie aplikacji ProteGO Safe i innych aplikacji służących do śledzenia kontaktów w bieżącej ich formie.

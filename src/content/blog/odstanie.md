@@ -1,8 +1,9 @@
 ---
-layout: post
-title:  "Odstanie"
-date:   2016-06-15 21:26:15 +0200
+title: "Odstanie"
+date: 2016-06-15
+lang: pl
 ---
+
 Mam ostatnio rozkminę na temat pewnego zjawiska, które roboczo nazwałem sobie *odstaniem*.
 Może nie jest to nawet zjawisko do końca prawdziwe i - paradoksalnie - sam fakt, że je obserwuję
 świadczy o tym, że sam jestem jego częścią.
@@ -17,8 +18,7 @@ Nie mam twardych dowodów, są to luźne obserwacje, nie twierdzę że wszyscy p
 chcę tylko pokazać pewien trend. Jeżeli kogoś bardzo to gryzie, niech podmieni sobie w tym
 wpisie *programiści* na moje imię i nazwisko. Czasem zamiast *programiści* będę pisać *my*.
 
-Skąd się to bierze?
--------------------
+## Skąd się to bierze?
 
 Jakie są powody takiego stanu rzeczy? Pokuszę się o nazwanie dwóch z nich.
 
@@ -44,8 +44,7 @@ Co łączy te dwa punkty? Oczywiście odcięcie od problemów reszty społeczeń
 Nie jest ono drastyczne, wszak programiści mają rodziców, rodzeństwo, znajomych czy żony,
 nie jest całkowite, dlatego właśnie proponuję termin *odstanie*.
 
-Do czego to prowadzi?
----------------------
+## Do czego to prowadzi?
 
 Nie chcę się rozwodzić na temat tego co się z programistami stanie, kiedy raptem okażą się
 niepotrzebni. Temat pewnie ciekawy, ale jednak nie na ten wpis.
@@ -91,7 +90,6 @@ czy też społeczności samej w sobie.
 Nie twierdzę, że to coś zdrożnego (bo sam wolę czasem pójść na takie wystąpienie niż
 coś mocno technicznego), ale znowu chcę pokazać pewien trend.
 
-Co z tym zrobić?
-----------------
+## Co z tym zrobić?
 
 Czy naprawdę po poprzednim rozdziale ktoś się spodziewał, że podam tutaj jakąś receptę?

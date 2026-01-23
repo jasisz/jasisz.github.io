@@ -1,8 +1,9 @@
 ---
-layout: post
-title:  "Limes inferior"
-date:   2016-04-30 09:46:48 +0200
+title: "Limes inferior"
+date: 2016-04-30
+lang: pl
 ---
+
 Sporo oglądałem, czytałem i słuchałem ostatnio [Douglasa Rushkoffa][rushkoff]. Jest to taki trochę filozof celebryta na dzisiejsze czasy, ale niektóre jego obserwacje są zastanawiające, żeby nie powiedzieć cenne i celne.
 Ostatnio bardzo promuje swoją książkę *Rzucając kamieniami w googlowego busa* (ang. *Throwing Rocks at the Google Bus*), w której rozwija swoje starsze pomysły i sprytnie dopasowuje je do obecnej chwili.
 

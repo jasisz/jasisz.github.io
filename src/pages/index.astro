@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<BaseLayout title="jasisz blog">
+  <div class="home">
+    <h1 class="page-heading">Posty</h1>
+
+    <ul class="post-list">
+      {posts.map((post) => (
+        <li>
+          <span class="post-meta">{post.data.date.toISOString().split('T')[0]}</span>
+          <h2>
+            <a class="post-link" href={`/${post.slug}`}>{post.data.title}</a>
+          </h2>
+        </li>
+      ))}
+    </ul>
+
+    <p class="rss-subscribe">
+      śledź <a href="/rss.xml">przez RSS</a>
+    </p>
+  </div>
+</BaseLayout>
