@@ -2,6 +2,8 @@
 title: "Odstanie"
 date: 2016-06-15
 lang: pl
+status: evergreen
+description: "O tym jak programiści odklieili się od realiów reszty społeczeństwa."
 ---
 
 Mam ostatnio rozkminę na temat pewnego zjawiska, które roboczo nazwałem sobie *odstaniem*.

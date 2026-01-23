@@ -3,17 +3,110 @@ import { getCollection } from 'astro:content';
 import BlogPost from '../layouts/BlogPost.astro';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
-  return posts.map((post) => ({
+  const przemyslenia = (await getCollection('przemyslenia')).map(post => ({ ...post, topic: 'przemyślenia' }));
+  const kod = (await getCollection('kod')).map(post => ({ ...post, topic: 'kod' }));
+  const allPosts = [...przemyslenia, ...kod];
+
+  return allPosts.map((post) => ({
     params: { slug: post.slug },
-    props: { post },
+    props: { post, allPosts },
   }));
 }
 
-const { post } = Astro.props;
+const { post, allPosts } = Astro.props;
 const { Content } = await post.render();
+
+// Find related posts (same topic, excluding current)
+const relatedByTopic = allPosts
+  .filter(p => p.slug !== post.slug && p.topic === post.topic)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 2);
+
+// If not enough related by topic, add random others
+const otherPosts = allPosts
+  .filter(p => p.slug !== post.slug && !relatedByTopic.includes(p))
+  .sort(() => Math.random() - 0.5)
+  .slice(0, 2 - relatedByTopic.length);
+
+const related = [...relatedByTopic, ...otherPosts];
+
+const statusIcons = { seed: '🌱', growing: '🌿', evergreen: '🌲' };
+const relatedTitle = post.data.lang === 'en' ? 'Continue exploring' : 'Przejdź dalej';
 ---
 
-<BlogPost title={post.data.title} date={post.data.date} lang={post.data.lang}>
+<BlogPost
+  title={post.data.title}
+  date={post.data.date}
+  lang={post.data.lang}
+  status={post.data.status}
+  topic={post.topic}
+>
   <Content />
+
+  {related.length > 0 && (
+    <aside class="related">
+      <h2 class="related-title">{relatedTitle}</h2>
+      <ul class="related-list">
+        {related.map((p) => (
+          <li>
+            <a class="related-link" href={`/${p.slug}`}>
+              <span class="related-status">{statusIcons[p.data.status]}</span>
+              <span class="related-name">{p.data.title}</span>
+              {p.data.lang === 'en' && <span class="related-lang">🇬🇧</span>}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </aside>
+  )}
 </BlogPost>
+
+<style>
+  .related {
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    background: rgba(107, 124, 94, 0.05);
+    border-radius: 12px;
+  }
+
+  .related-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--grey-color);
+    margin-bottom: 1rem;
+  }
+
+  .related-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .related-link {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .related-status {
+    font-size: 0.85rem;
+  }
+
+  .related-name {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1rem;
+    color: var(--text-color);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+  }
+
+  .related-link:hover .related-name {
+    border-bottom-color: var(--brand-color);
+  }
+</style>

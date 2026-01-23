@@ -5,23 +5,156 @@ interface Props {
   title: string;
   date: Date;
   lang?: string;
+  status?: 'seed' | 'growing' | 'evergreen';
+  topic?: string;
 }
 
-const { title, date, lang = 'pl' } = Astro.props;
+const { title, date, lang = 'pl', status = 'evergreen', topic } = Astro.props;
 const formattedDate = date.toISOString().split('T')[0];
+
+const i18n = {
+  pl: {
+    seed: { icon: '🌱', label: 'ziarno', desc: 'świeża myśl, dopiero kiełkuje' },
+    growing: { icon: '🌿', label: 'rośnie', desc: 'rozwijana, jeszcze nie gotowa' },
+    evergreen: { icon: '🌲', label: 'dojrzała', desc: 'pielęgnowana notatka' },
+    planted: 'posadzone',
+    backToGarden: '← wróć do ogrodu',
+  },
+  en: {
+    seed: { icon: '🌱', label: 'seed', desc: 'fresh thought, just sprouting' },
+    growing: { icon: '🌿', label: 'growing', desc: 'developing, not ready yet' },
+    evergreen: { icon: '🌲', label: 'evergreen', desc: 'well-tended note' },
+    planted: 'planted',
+    backToGarden: '← back to garden',
+  },
+};
+
+const t = i18n[lang as keyof typeof i18n] || i18n.pl;
+const currentStatus = t[status];
 ---
 
-<BaseLayout title={title}>
+<BaseLayout title={title} lang={lang}>
   <article class="post" lang={lang}>
     <header class="post-header">
+      <div class="post-meta-top">
+        {topic && (
+          <a class="post-topic" href={`/${topic.replace('ś', 's').replace('ę', 'e')}`}>← {topic}</a>
+        )}
+      </div>
+
       <h1 class="post-title">{title}</h1>
-      <p class="post-meta">
-        <time datetime={date.toISOString()}>{formattedDate}</time>
-      </p>
+
+      <div class="post-garden-meta">
+        <span class="post-status" title={currentStatus.desc}>
+          <span class="status-icon">{currentStatus.icon}</span>
+          <span class="status-label">{currentStatus.label}</span>
+        </span>
+        <span class="meta-separator">·</span>
+        <time class="post-date" datetime={date.toISOString()}>
+          {t.planted} {formattedDate}
+        </time>
+      </div>
     </header>
 
     <div class="post-content">
       <slot />
     </div>
+
+    <footer class="post-footer">
+      <a href="/" class="back-to-garden">{t.backToGarden}</a>
+    </footer>
   </article>
 </BaseLayout>
+
+<style>
+  .post {
+    padding: 1rem 0;
+  }
+
+  .post-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px dashed var(--grey-color-light);
+  }
+
+  .post-meta-top {
+    margin-bottom: 1rem;
+  }
+
+  .post-topic {
+    font-size: 0.85rem;
+    color: var(--grey-color);
+    text-decoration: none;
+  }
+
+  .post-topic:hover {
+    color: var(--brand-color);
+  }
+
+  .post-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1.25;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+  }
+
+  .post-garden-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+    color: var(--grey-color);
+  }
+
+  .post-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.25rem 0.6rem;
+    background: rgba(107, 124, 94, 0.1);
+    border-radius: 12px;
+  }
+
+  .status-icon {
+    font-size: 0.9rem;
+  }
+
+  .status-label {
+    font-size: 0.8rem;
+  }
+
+  .meta-separator {
+    color: var(--grey-color-light);
+  }
+
+  .post-date {
+    font-style: italic;
+  }
+
+  .post-content {
+    margin-bottom: 3rem;
+  }
+
+  .post-footer {
+    padding-top: 1.5rem;
+    border-top: 1px dashed var(--grey-color-light);
+  }
+
+  .back-to-garden {
+    font-size: 0.9rem;
+    color: var(--grey-color);
+  }
+
+  .back-to-garden:hover {
+    color: var(--brand-color);
+  }
+
+  @media screen and (max-width: 600px) {
+    .post-title {
+      font-size: 1.65rem;
+    }
+  }
+</style>

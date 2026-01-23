@@ -2,6 +2,8 @@
 title: "Limes inferior"
 date: 2016-04-30
 lang: pl
+status: evergreen
+description: "O Douglasie Rushkoffie, kulturze startupów i technologicznym zachwycie."
 ---
 
 Sporo oglądałem, czytałem i słuchałem ostatnio [Douglasa Rushkoffa][rushkoff]. Jest to taki trochę filozof celebryta na dzisiejsze czasy, ale niektóre jego obserwacje są zastanawiające, żeby nie powiedzieć cenne i celne.

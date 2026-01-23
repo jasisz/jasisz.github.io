@@ -1,28 +1,21 @@
 import rss from '@astrojs/rss';
-import { getCollection } from 'astro:content';
 import type { APIContext } from 'astro';
-
-export async function getAllPosts() {
-  const przemyslenia = await getCollection('przemyslenia');
-  const kod = await getCollection('kod');
-  return [...przemyslenia, ...kod].sort(
-    (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
-  );
-}
+import { getAllPosts } from './rss.xml';
 
 export async function GET(context: APIContext) {
   const allPosts = await getAllPosts();
+  const plPosts = allPosts.filter((post) => post.data.lang === 'pl');
 
   return rss({
-    title: 'jasisz – cyfrowy ogród',
+    title: 'jasisz – cyfrowy ogród (PL)',
     description: 'Cyfrowy ogród – miejsce, gdzie sadzę i pielęgnuję myśli o technologii, społeczeństwie i kodzie.',
     site: context.site!,
-    items: allPosts.map((post) => ({
+    customData: '<language>pl</language>',
+    items: plPosts.map((post) => ({
       title: post.data.title,
       pubDate: post.data.date,
       description: post.data.description,
       link: `/${post.slug}`,
-      customData: `<language>${post.data.lang}</language>`,
     })),
   });
 }

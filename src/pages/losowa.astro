@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const przemyslenia = await getCollection('przemyslenia');
+const kod = await getCollection('kod');
+const slugs = [...przemyslenia, ...kod].map(p => p.slug);
+---
+
+<BaseLayout title="Losowa">
+  <div class="loading">
+    <p>🎲 Losuję...</p>
+  </div>
+</BaseLayout>
+
+<script define:vars={{ slugs }}>
+  const randomSlug = slugs[Math.floor(Math.random() * slugs.length)];
+  window.location.href = '/' + randomSlug;
+</script>
+
+<style>
+  .loading {
+    padding: 4rem 0;
+    text-align: center;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.1rem;
+    color: var(--grey-color);
+  }
+</style>

@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const przemyslenia = (await getCollection('przemyslenia')).map(p => ({ ...p, topic: 'przemyślenia' }));
+const kod = (await getCollection('kod')).map(p => ({ ...p, topic: 'kod' }));
+
+const posts = [...przemyslenia, ...kod].sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const statusIcons = { seed: '🌱', growing: '🌿', evergreen: '🌲' };
+---
+
+<BaseLayout title="wszystko">
+  <div class="all-page">
+    <h1 class="page-title">wszystko</h1>
+
+    <ul class="notes">
+      {posts.map((post) => (
+        <li>
+          <a class="note" href={`/${post.slug}`}>
+            <span class="note-status">{statusIcons[post.data.status]}</span>
+            <span class="note-title">{post.data.title}</span>
+            {post.data.lang === 'en' && <span class="note-lang">🇬🇧</span>}
+            <span class="note-topic">{post.topic}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <a class="back-link" href="/">← wróć do ogrodu</a>
+  </div>
+</BaseLayout>
+
+<style>
+  .all-page {
+    padding: 2rem 0;
+  }
+
+  .page-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+  }
+
+  .notes {
+    list-style: none;
+    margin: 0 0 2rem 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .note {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .note:hover {
+    text-decoration: none;
+  }
+
+  .note-status {
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .note-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+  }
+
+  .note:hover .note-title {
+    border-bottom-color: var(--brand-color);
+  }
+
+  .note-topic {
+    font-size: 0.8rem;
+    color: var(--grey-color);
+    background: var(--grey-color-light);
+    padding: 0.1rem 0.5rem;
+    border-radius: 8px;
+    margin-left: auto;
+  }
+
+  .back-link {
+    font-size: 0.9rem;
+    color: var(--grey-color);
+  }
+
+  .back-link:hover {
+    color: var(--brand-color);
+  }
+</style>

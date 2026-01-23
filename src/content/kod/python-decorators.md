@@ -2,6 +2,8 @@
 title: "Python decorators"
 date: 2017-03-31
 lang: en
+status: evergreen
+description: "A simple explanation of Python decorators based on first-class functions."
 ---
 
 That might be unusal - post is in English and it is about some technical aspects of programming language.

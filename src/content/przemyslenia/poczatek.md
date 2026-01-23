@@ -2,6 +2,8 @@
 title: "Internetowy luddyzm, czyli początek"
 date: 2016-04-18
 lang: pl
+status: evergreen
+description: "Manifest prostego bloga bez śledzenia i reklam."
 ---
 
 Miałem już kiedyś [bloga][blog], a nawet miałem ich kilka. Bez żadnej przesady można powiedzieć, że bloguję już ponad dekadę, spuszczając zasłonę milczenia na kilkuletnie często przerwy.

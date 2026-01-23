@@ -2,6 +2,8 @@
 title: "Dlaczego nie piszę się na Contact Tracing"
 date: 2020-04-29
 lang: pl
+status: evergreen
+description: "O problemach z aplikacją ProteGO Safe i rozwiązaniami Google/Apple."
 ---
 
 TLDR: Odradzam instalowanie aplikacji ProteGO Safe i innych aplikacji służących do śledzenia kontaktów w bieżącej ich formie.

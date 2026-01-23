@@ -1,0 +1,133 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('przemyslenia'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const statusIcons = { seed: '🌱', growing: '🌿', evergreen: '🌲' };
+---
+
+<BaseLayout title="przemyślenia">
+  <div class="topic-page">
+    <header class="topic-header">
+      <span class="topic-icon">💭</span>
+      <div>
+        <h1 class="topic-title">przemyślenia</h1>
+        <p class="topic-desc">eseje o technologii, społeczeństwie i internecie</p>
+      </div>
+    </header>
+
+    <ul class="notes">
+      {posts.map((post) => (
+        <li>
+          <a class="note" href={`/${post.slug}`}>
+            <span class="note-status">{statusIcons[post.data.status]}</span>
+            <div class="note-content">
+              <span class="note-title">
+                {post.data.title}
+                {post.data.lang === 'en' && <span class="note-lang">🇬🇧</span>}
+              </span>
+              {post.data.description && (
+                <span class="note-desc">{post.data.description}</span>
+              )}
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <a class="back-link" href="/">← wróć do ogrodu</a>
+  </div>
+</BaseLayout>
+
+<style>
+  .topic-page {
+    padding: 2rem 0;
+  }
+
+  .topic-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .topic-icon {
+    font-size: 2rem;
+  }
+
+  .topic-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin: 0;
+  }
+
+  .topic-desc {
+    font-size: 0.9rem;
+    color: var(--grey-color);
+    margin: 0.25rem 0 0 0;
+  }
+
+  .notes {
+    list-style: none;
+    margin: 0 0 2rem 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: inherit;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--grey-color-light);
+  }
+
+  .note:hover {
+    text-decoration: none;
+  }
+
+  .note-status {
+    font-size: 1rem;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+
+  .note-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .note-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.15rem;
+    color: var(--text-color);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease;
+  }
+
+  .note:hover .note-title {
+    border-bottom-color: var(--brand-color);
+  }
+
+  .note-desc {
+    font-size: 0.9rem;
+    color: var(--grey-color);
+  }
+
+  .back-link {
+    font-size: 0.9rem;
+    color: var(--grey-color);
+  }
+
+  .back-link:hover {
+    color: var(--brand-color);
+  }
+</style>
