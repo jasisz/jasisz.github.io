@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BlogPost from '../layouts/BlogPost.astro';
+import PostCard from '../components/PostCard.astro';
 
 export async function getStaticPaths() {
   const przemyslenia = (await getCollection('przemyslenia')).map(post => ({ ...post, topic: 'przemyślenia' }));
@@ -45,17 +46,18 @@ const relatedTitle = post.data.lang === 'en' ? 'See also' : 'Zobacz też';
   {related.length > 0 && (
     <aside class="related">
       <h2 class="related-title">{relatedTitle}</h2>
-      <ul class="related-list">
+      <div class="posts-grid">
         {related.map((p) => (
-          <li>
-            <a class="related-link" href={`/${p.slug}`}>
-              <span class="related-name">{p.data.title}</span>
-              {p.data.lang === 'en' && <span class="related-lang">EN</span>}
-              <span class="related-topic">{p.topic}</span>
-            </a>
-          </li>
+          <PostCard
+            href={`/${p.slug}`}
+            title={p.data.title}
+            date={p.data.date}
+            description={p.data.description}
+            topic={p.topic}
+            lang={p.data.lang}
+          />
         ))}
-      </ul>
+      </div>
     </aside>
   )}
 </BlogPost>
@@ -74,48 +76,6 @@ const relatedTitle = post.data.lang === 'en' ? 'See also' : 'Zobacz też';
     color: var(--grey-color);
     text-transform: lowercase;
     letter-spacing: 0.05em;
-    margin-bottom: 1rem;
-  }
-
-  .related-list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .related-link {
-    display: flex;
-    align-items: baseline;
-    gap: 0.75rem;
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .related-link:hover .related-name {
-    color: var(--brand-color);
-  }
-
-  .related-name {
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1rem;
-    color: var(--text-color);
-    transition: color 0.15s ease;
-  }
-
-  .related-lang {
-    font-size: 0.7rem;
-    padding: 0.1rem 0.4rem;
-    background: var(--grey-color-light);
-    border-radius: 3px;
-    color: var(--grey-color);
-  }
-
-  .related-topic {
-    font-size: 0.8rem;
-    color: var(--grey-color);
-    margin-left: auto;
+    margin-bottom: 1.25rem;
   }
 </style>

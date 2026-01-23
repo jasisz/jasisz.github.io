@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
 import { getCollection } from 'astro:content';
 
 const przemyslenia = (await getCollection('przemyslenia')).map(p => ({ ...p, topic: 'przemyślenia' }));
@@ -8,7 +9,7 @@ const allPosts = [...przemyslenia, ...kod];
 
 const recentPosts = [...allPosts]
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 3);
+  .slice(0, 4);
 
 const paths = [
   { name: 'przemyślenia', slug: 'przemyslenia', count: przemyslenia.length },
@@ -27,16 +28,16 @@ const paths = [
 
     <section class="section">
       <h2 class="section-title">Ostatnie</h2>
-      <div class="posts-list">
+      <div class="posts-grid">
         {recentPosts.map((post) => (
-          <a class="post-item" href={`/${post.slug}`}>
-            <div class="post-meta">
-              <span class="post-topic">{post.topic}</span>
-              {post.data.lang === 'en' && <span class="post-lang">EN</span>}
-              <time class="post-date">{post.data.date.toISOString().split('T')[0]}</time>
-            </div>
-            <h3 class="post-title">{post.data.title}</h3>
-          </a>
+          <PostCard
+            href={`/${post.slug}`}
+            title={post.data.title}
+            date={post.data.date}
+            description={post.data.description}
+            topic={post.topic}
+            lang={post.data.lang}
+          />
         ))}
       </div>
     </section>
@@ -77,69 +78,6 @@ const paths = [
     max-width: 540px;
   }
 
-  .section {
-    margin-bottom: 2.5rem;
-  }
-
-  .section-title {
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 0.85rem;
-    font-weight: 400;
-    color: var(--grey-color);
-    text-transform: lowercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--grey-color-light);
-  }
-
-  /* Posts list */
-  .posts-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-  }
-
-  .post-item {
-    text-decoration: none;
-    color: inherit;
-  }
-
-  .post-item:hover .post-title {
-    color: var(--brand-color);
-  }
-
-  .post-meta {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-size: 0.8rem;
-    color: var(--grey-color);
-    margin-bottom: 0.25rem;
-  }
-
-  .post-topic {
-    text-transform: lowercase;
-  }
-
-  .post-lang {
-    font-size: 0.7rem;
-    padding: 0.1rem 0.4rem;
-    background: var(--grey-color-light);
-    border-radius: 3px;
-  }
-
-  .post-date {
-    margin-left: auto;
-  }
-
-  .post-title {
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.15rem;
-    font-weight: 400;
-    margin: 0;
-    transition: color 0.15s ease;
-  }
 
   /* Paths */
   .paths {

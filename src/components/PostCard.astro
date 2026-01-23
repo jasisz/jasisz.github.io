@@ -1,0 +1,23 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  date: Date;
+  description?: string;
+  topic?: string;
+  lang?: string;
+}
+
+const { href, title, date, description, topic, lang } = Astro.props;
+const formattedDate = date.toISOString().split('T')[0];
+---
+
+<a class="post-card" href={href}>
+  <div class="post-meta">
+    {topic && <span class="post-topic">{topic}</span>}
+    {lang === 'en' && <span class="post-lang">EN</span>}
+  </div>
+  <h3 class="post-title">{title}</h3>
+  {description && <p class="post-desc">{description}</p>}
+  <time class="post-date">{formattedDate}</time>
+</a>

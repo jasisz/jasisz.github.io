@@ -1,0 +1,426 @@
+/*
+ * Global Styles
+ * =============
+ * Jeden plik ze wszystkimi globalnymi stylami.
+ */
+
+/* ==========================================================================
+   1. Reset & Variables
+   ========================================================================== */
+
+body, h1, h2, h3, h4, h5, h6,
+p, blockquote, pre, hr,
+dl, dd, ol, ul, figure {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --base-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --heading-font-family: Georgia, "Times New Roman", serif;
+  --base-font-size: 16px;
+  --base-font-weight: 400;
+  --small-font-size: 14px;
+  --base-line-height: 1.5;
+  --spacing-unit: 30px;
+  --text-color: #2d2d2d;
+  --background-color: #faf9f7;
+  --brand-color: #6b7c5e;
+  --brand-color-dark: #4a5740;
+  --grey-color: #6b6b6b;
+  --grey-color-light: #e8e6e3;
+  --grey-color-dark: #3d3d3d;
+  --content-width: 800px;
+}
+
+/* ==========================================================================
+   2. Base Styles
+   ========================================================================== */
+
+html {
+  scrollbar-gutter: stable;
+}
+
+body {
+  font: var(--base-font-weight) var(--base-font-size)/var(--base-line-height) var(--base-font-family);
+  color: var(--text-color);
+  background-color: var(--background-color);
+  -webkit-text-size-adjust: 100%;
+  font-feature-settings: "kern" 1;
+  font-kerning: normal;
+}
+
+h1, h2, h3, h4, h5, h6,
+p, blockquote, pre,
+ul, ol, dl, figure {
+  margin-bottom: calc(var(--spacing-unit) / 2);
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+ul, ol {
+  margin-left: var(--spacing-unit);
+}
+
+li > ul,
+li > ol {
+  margin-bottom: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--heading-font-family);
+  font-weight: 400;
+}
+
+/* ==========================================================================
+   3. Links
+   ========================================================================== */
+
+a {
+  color: var(--brand-color);
+  text-decoration: none;
+}
+
+a:visited {
+  color: var(--brand-color-dark);
+}
+
+a:hover {
+  color: var(--text-color);
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   4. Code & Blockquotes
+   ========================================================================== */
+
+blockquote {
+  color: var(--grey-color);
+  border-left: 4px solid var(--grey-color-light);
+  padding-left: calc(var(--spacing-unit) / 2);
+  font-size: 18px;
+  letter-spacing: -1px;
+  font-style: italic;
+}
+
+blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+pre, code {
+  font-size: 15px;
+  border: 1px solid var(--grey-color-light);
+  border-radius: 3px;
+  background-color: #eef;
+}
+
+code {
+  padding: 1px 5px;
+}
+
+pre {
+  padding: 8px 12px;
+  overflow-x: auto;
+}
+
+pre > code {
+  border: 0;
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.astro-code {
+  background: #eef !important;
+  border: 1px solid var(--grey-color-light);
+  border-radius: 3px;
+  padding: 8px 12px;
+  overflow-x: auto;
+}
+
+/* ==========================================================================
+   5. Layout - Wrapper
+   ========================================================================== */
+
+.wrapper {
+  max-width: calc(var(--content-width) - (var(--spacing-unit) * 2));
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: var(--spacing-unit);
+  padding-left: var(--spacing-unit);
+}
+
+.wrapper::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+@media screen and (max-width: 800px) {
+  .wrapper {
+    max-width: calc(var(--content-width) - var(--spacing-unit));
+    padding-right: calc(var(--spacing-unit) / 2);
+    padding-left: calc(var(--spacing-unit) / 2);
+  }
+}
+
+/* ==========================================================================
+   6. Layout - Header
+   ========================================================================== */
+
+.site-header {
+  border-bottom: 1px solid var(--grey-color-light);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.95);
+}
+
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-title {
+  font-family: var(--heading-font-family);
+  font-size: 1.25rem;
+  font-weight: 400;
+  color: var(--grey-color-dark);
+  text-decoration: none;
+}
+
+.site-title:hover {
+  color: var(--brand-color);
+  text-decoration: none;
+}
+
+.site-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.site-nav a {
+  font-size: 0.9rem;
+  color: var(--grey-color);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.site-nav a:hover {
+  color: var(--brand-color);
+  text-decoration: none;
+}
+
+@media screen and (max-width: 600px) {
+  .site-nav {
+    gap: 1rem;
+  }
+
+  .site-nav a {
+    font-size: 0.8rem;
+  }
+
+  .site-title {
+    font-size: 1.1rem;
+  }
+}
+
+/* ==========================================================================
+   7. Layout - Footer
+   ========================================================================== */
+
+.site-footer {
+  margin-top: 3rem;
+  border-top: 1px solid var(--grey-color-light);
+}
+
+.footer-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 0;
+  gap: 2rem;
+}
+
+.footer-desc {
+  font-size: 0.85rem;
+  color: var(--grey-color);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-links a {
+  font-size: 0.85rem;
+  color: var(--grey-color);
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: var(--brand-color);
+  text-decoration: none;
+}
+
+.footer-bottom {
+  border-top: 1px solid var(--grey-color-light);
+  padding: 1rem 0;
+  font-size: 0.8rem;
+  color: var(--grey-color);
+}
+
+@media screen and (max-width: 600px) {
+  .footer-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+}
+
+/* ==========================================================================
+   8. Layout - Page Content
+   ========================================================================== */
+
+.page-content {
+  padding: var(--spacing-unit) 0;
+}
+
+.page {
+  padding: 2rem 0;
+}
+
+.page-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--grey-color-light);
+}
+
+.page-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  margin: 0 0 0.25rem 0;
+}
+
+.page-desc {
+  font-size: 0.9rem;
+  color: var(--grey-color);
+  margin: 0;
+}
+
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--grey-color-light);
+}
+
+.nav-link {
+  font-size: 0.9rem;
+  color: var(--grey-color);
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: var(--brand-color);
+}
+
+/* ==========================================================================
+   9. Components - Section
+   ========================================================================== */
+
+.section {
+  margin-bottom: 2.5rem;
+}
+
+.section-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--grey-color);
+  text-transform: lowercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--grey-color-light);
+}
+
+/* ==========================================================================
+   10. Components - Posts Grid & Cards
+   ========================================================================== */
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.post-card {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  background: white;
+  border: 1px solid var(--grey-color-light);
+  border-radius: 8px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.post-card:hover {
+  border-color: var(--brand-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.post-card .post-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--grey-color);
+  margin-bottom: 0.5rem;
+  min-height: 1rem;
+}
+
+.post-card .post-topic {
+  text-transform: lowercase;
+}
+
+.post-card .post-lang {
+  font-size: 0.65rem;
+  padding: 0.1rem 0.35rem;
+  background: var(--grey-color-light);
+  border-radius: 3px;
+}
+
+.post-card .post-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.4;
+  color: var(--text-color);
+}
+
+.post-card .post-desc {
+  font-size: 0.85rem;
+  color: var(--grey-color);
+  margin: 0 0 0.75rem 0;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.post-card .post-date {
+  font-size: 0.75rem;
+  color: var(--grey-color);
+  opacity: 0.7;
+}
