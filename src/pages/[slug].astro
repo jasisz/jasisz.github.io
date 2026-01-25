@@ -40,6 +40,7 @@ const related = [...relatedByTopic, ...otherPosts];
 
 const relatedTitle = post.data.lang === 'en' ? 'See also' : 'Zobacz też';
 const work = post.data.work;
+const isTworczosc = post.topic === 'twórczość';
 ---
 
 <BlogPost
@@ -48,6 +49,7 @@ const work = post.data.work;
   lang={post.data.lang}
   status={post.data.status}
   topic={post.topic}
+  author={isTworczosc ? "Szymon Teżewski (jasisz)" : undefined}
 >
   {work && (
     <aside class="book-info">

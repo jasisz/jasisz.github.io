@@ -26,6 +26,23 @@ try {
       <p class="page-desc">Recenzje książek i własna twórczość literacka</p>
     </header>
 
+    {tworczoscLiteracka.length > 0 && (
+      <section class="section">
+        <h2 class="section-title">twórczość</h2>
+        <div class="posts-grid">
+          {tworczoscLiteracka.map((post) => (
+            <PostCard
+              href={`/${post.slug}`}
+              title={post.data.title}
+              date={post.data.date}
+              description={post.data.description}
+              lang={post.data.lang}
+            />
+          ))}
+        </div>
+      </section>
+    )}
+
     {recenzjeKsiazek.length > 0 && (
       <section class="section">
         <h2 class="section-title">recenzje książek</h2>
@@ -38,23 +55,6 @@ try {
               description={post.data.description}
               lang={post.data.lang}
               work={post.data.work}
-            />
-          ))}
-        </div>
-      </section>
-    )}
-
-    {tworczoscLiteracka.length > 0 && (
-      <section class="section">
-        <h2 class="section-title">twórczość</h2>
-        <div class="posts-grid">
-          {tworczoscLiteracka.map((post) => (
-            <PostCard
-              href={`/${post.slug}`}
-              title={post.data.title}
-              date={post.data.date}
-              description={post.data.description}
-              lang={post.data.lang}
             />
           ))}
         </div>

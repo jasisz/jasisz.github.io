@@ -7,9 +7,10 @@ interface Props {
   lang?: string;
   status?: 'seed' | 'growing' | 'evergreen';
   topic?: string;
+  author?: string;
 }
 
-const { title, date, lang = 'pl', status = 'evergreen', topic } = Astro.props;
+const { title, date, lang = 'pl', status = 'evergreen', topic, author } = Astro.props;
 const formattedDate = date.toISOString().split('T')[0];
 
 const statusLabels = {
@@ -36,6 +37,7 @@ const backLabel = lang === 'en' ? '← back' : '← wróć';
       </div>
 
       <h1 class="post-title">{title}</h1>
+      {author && <p class="post-author">{author}</p>}
     </header>
 
     <div class="post-content">
@@ -105,6 +107,14 @@ const backLabel = lang === 'en' ? '← back' : '← wróć';
     line-height: 1.25;
     margin: 0;
     color: var(--text-color);
+  }
+
+  .post-author {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--grey-color);
+    margin: 0.5rem 0 0 0;
   }
 
   .post-content {
