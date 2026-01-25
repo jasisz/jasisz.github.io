@@ -6,9 +6,14 @@ interface Props {
   description?: string;
   topic?: string;
   lang?: string;
+  work?: {
+    title: string;
+    creator: string;
+    year?: number;
+  };
 }
 
-const { href, title, date, description, topic, lang } = Astro.props;
+const { href, title, date, description, topic, lang, work } = Astro.props;
 const formattedDate = date.toISOString().split('T')[0];
 ---
 
@@ -17,6 +22,12 @@ const formattedDate = date.toISOString().split('T')[0];
     {topic && <span class="post-topic">{topic}</span>}
     {lang === 'en' && <span class="post-lang">EN</span>}
   </div>
+  {work ? (
+    <div class="post-book">
+      <span class="post-book-author">{work.creator}</span>
+      <span class="post-book-title">{work.title}</span>
+    </div>
+  ) : null}
   <h3 class="post-title">{title}</h3>
   {description && <p class="post-desc">{description}</p>}
   <time class="post-date">{formattedDate}</time>

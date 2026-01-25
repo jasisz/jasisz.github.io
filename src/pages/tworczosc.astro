@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+let posts: any[] = [];
+try {
+  posts = (await getCollection('tworczosc'))
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+} catch (e) {}
+
+// Grupuj po medium
+const literatura = posts.filter(p => p.data.medium === 'literatura');
+const muzyka = posts.filter(p => p.data.medium === 'muzyka');
+const inne = posts.filter(p => p.data.medium === 'inne');
+
+const sections = [
+  { name: 'literatura', posts: literatura },
+  { name: 'muzyka', posts: muzyka },
+  { name: 'inne', posts: inne },
+].filter(s => s.posts.length > 0);
+---
+
+<BaseLayout title="twórczość">
+  <div class="page">
+    <header class="page-header">
+      <h1 class="page-title">twórczość</h1>
+      <p class="page-desc">Rzeczy które tworzę</p>
+    </header>
+
+    {sections.length > 0 ? (
+      sections.map((section) => (
+        <section class="section">
+          <h2 class="section-title">{section.name}</h2>
+          <div class="posts-grid">
+            {section.posts.map((post) => (
+              <PostCard
+                href={`/${post.slug}`}
+                title={post.data.title}
+                date={post.data.date}
+                description={post.data.description}
+                lang={post.data.lang}
+              />
+            ))}
+          </div>
+        </section>
+      ))
+    ) : (
+      <p class="empty-state">Jeszcze nic tu nie ma...</p>
+    )}
+
+    <nav class="page-nav">
+      <a class="nav-link" href="/">← wróć</a>
+    </nav>
+  </div>
+</BaseLayout>
+
+<style>
+  .empty-state {
+    color: var(--grey-color);
+    font-style: italic;
+    margin-bottom: 2rem;
+  }
+</style>

@@ -18,4 +18,24 @@ const kod = defineCollection({
   schema: baseSchema,
 });
 
-export const collections = { przemyslenia, kod };
+const recenzje = defineCollection({
+  type: 'content',
+  schema: baseSchema.extend({
+    medium: z.enum(['książka', 'film', 'serial', 'gra', 'muzyka', 'inne']),
+    work: z.object({
+      title: z.string(),
+      creator: z.string(),
+      year: z.number().optional(),
+      isbn: z.string().optional(),
+    }),
+  }),
+});
+
+const tworczosc = defineCollection({
+  type: 'content',
+  schema: baseSchema.extend({
+    medium: z.enum(['literatura', 'muzyka', 'inne']),
+  }),
+});
+
+export const collections = { przemyslenia, kod, recenzje, tworczosc };

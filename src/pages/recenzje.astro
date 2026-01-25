@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('recenzje'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Grupuj po medium
+const ksiazki = posts.filter(p => p.data.medium === 'książka');
+const filmy = posts.filter(p => p.data.medium === 'film');
+const seriale = posts.filter(p => p.data.medium === 'serial');
+const gry = posts.filter(p => p.data.medium === 'gra');
+const muzyka = posts.filter(p => p.data.medium === 'muzyka');
+const inne = posts.filter(p => p.data.medium === 'inne');
+
+const sections = [
+  { name: 'książki', posts: ksiazki },
+  { name: 'filmy', posts: filmy },
+  { name: 'seriale', posts: seriale },
+  { name: 'gry', posts: gry },
+  { name: 'muzyka', posts: muzyka },
+  { name: 'inne', posts: inne },
+].filter(s => s.posts.length > 0);
+---
+
+<BaseLayout title="recenzje">
+  <div class="page">
+    <header class="page-header">
+      <h1 class="page-title">recenzje</h1>
+      <p class="page-desc">Co czytam, oglądam, gram i słucham</p>
+    </header>
+
+    {sections.map((section) => (
+      <section class="section">
+        <h2 class="section-title">{section.name}</h2>
+        <div class="posts-grid">
+          {section.posts.map((post) => (
+            <PostCard
+              href={`/${post.slug}`}
+              title={post.data.title}
+              date={post.data.date}
+              description={post.data.description}
+              lang={post.data.lang}
+              work={post.data.work}
+            />
+          ))}
+        </div>
+      </section>
+    ))}
+
+    <nav class="page-nav">
+      <a class="nav-link" href="/">← wróć</a>
+    </nav>
+  </div>
+</BaseLayout>

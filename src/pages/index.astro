@@ -5,7 +5,14 @@ import { getCollection } from 'astro:content';
 
 const przemyslenia = (await getCollection('przemyslenia')).map(p => ({ ...p, topic: 'przemyślenia' }));
 const kod = (await getCollection('kod')).map(p => ({ ...p, topic: 'kod' }));
-const allPosts = [...przemyslenia, ...kod];
+const recenzje = (await getCollection('recenzje')).map(p => ({ ...p, topic: 'recenzje' }));
+
+let tworczosc: any[] = [];
+try {
+  tworczosc = (await getCollection('tworczosc')).map(p => ({ ...p, topic: 'twórczość' }));
+} catch (e) {}
+
+const allPosts = [...przemyslenia, ...kod, ...recenzje, ...tworczosc];
 
 const recentPosts = [...allPosts]
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -14,6 +21,8 @@ const recentPosts = [...allPosts]
 const paths = [
   { name: 'przemyślenia', slug: 'przemyslenia', count: przemyslenia.length },
   { name: 'kod', slug: 'kod', count: kod.length },
+  { name: 'recenzje', slug: 'recenzje', count: recenzje.length },
+  ...(tworczosc.length > 0 ? [{ name: 'twórczość', slug: 'tworczosc', count: tworczosc.length }] : []),
 ];
 ---
 
@@ -21,7 +30,7 @@ const paths = [
   <div class="home">
     <header class="intro">
       <p class="intro-text">
-        Zbiór zapisków o technologii, programowaniu i rzeczach, które mnie interesują.
+        Zbiór zapisków o programowaniu, literaturze i rzeczach, które mnie interesują.
         Możesz tu swobodnie błądzić między tematami.
       </p>
     </header>
@@ -37,6 +46,7 @@ const paths = [
             description={post.data.description}
             topic={post.topic}
             lang={post.data.lang}
+            work={post.data.work}
           />
         ))}
       </div>

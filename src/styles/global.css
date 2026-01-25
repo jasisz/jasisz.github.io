@@ -411,6 +411,27 @@ pre > code {
   color: var(--text-color);
 }
 
+.post-card .post-book {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-bottom: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed var(--grey-color-light);
+}
+
+.post-card .post-book-author {
+  font-size: 0.75rem;
+  color: var(--grey-color);
+}
+
+.post-card .post-book-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.9rem;
+  font-style: italic;
+  color: var(--text-color);
+}
+
 .post-card .post-desc {
   font-size: 0.85rem;
   color: var(--grey-color);

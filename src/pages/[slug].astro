@@ -6,7 +6,14 @@ import PostCard from '../components/PostCard.astro';
 export async function getStaticPaths() {
   const przemyslenia = (await getCollection('przemyslenia')).map(post => ({ ...post, topic: 'przemyślenia' }));
   const kod = (await getCollection('kod')).map(post => ({ ...post, topic: 'kod' }));
-  const allPosts = [...przemyslenia, ...kod];
+  const recenzje = (await getCollection('recenzje')).map(post => ({ ...post, topic: 'recenzje' }));
+
+  let tworczosc: any[] = [];
+  try {
+    tworczosc = (await getCollection('tworczosc')).map(post => ({ ...post, topic: 'twórczość' }));
+  } catch (e) {}
+
+  const allPosts = [...przemyslenia, ...kod, ...recenzje, ...tworczosc];
 
   return allPosts.map((post) => ({
     params: { slug: post.slug },
@@ -32,6 +39,7 @@ const otherPosts = allPosts
 const related = [...relatedByTopic, ...otherPosts];
 
 const relatedTitle = post.data.lang === 'en' ? 'See also' : 'Zobacz też';
+const work = post.data.work;
 ---
 
 <BlogPost
@@ -41,6 +49,17 @@ const relatedTitle = post.data.lang === 'en' ? 'See also' : 'Zobacz też';
   status={post.data.status}
   topic={post.topic}
 >
+  {work && (
+    <aside class="book-info">
+      <div class="book-details">
+        <span class="book-author">{work.creator}</span>
+        <span class="book-title">{work.title}</span>
+        {work.year && <span class="book-year">{work.year}</span>}
+        {work.isbn && <span class="book-isbn">ISBN: {work.isbn}</span>}
+      </div>
+    </aside>
+  )}
+
   <Content />
 
   {related.length > 0 && (
@@ -55,6 +74,7 @@ const relatedTitle = post.data.lang === 'en' ? 'See also' : 'Zobacz też';
             description={p.data.description}
             topic={p.topic}
             lang={p.data.lang}
+            work={p.data.work}
           />
         ))}
       </div>
@@ -63,6 +83,37 @@ const relatedTitle = post.data.lang === 'en' ? 'See also' : 'Zobacz też';
 </BlogPost>
 
 <style>
+  .book-info {
+    margin-bottom: 2rem;
+    padding: 1rem 1.25rem;
+    background: rgba(107, 124, 94, 0.06);
+    border-radius: 6px;
+    border-left: 3px solid var(--brand-color);
+  }
+
+  .book-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .book-author {
+    font-size: 0.9rem;
+    color: var(--grey-color);
+  }
+
+  .book-title {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--text-color);
+  }
+
+  .book-year, .book-isbn {
+    font-size: 0.8rem;
+    color: var(--grey-color);
+  }
+
   .related {
     margin-top: 3rem;
     padding-top: 2rem;

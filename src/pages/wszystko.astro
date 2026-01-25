@@ -4,8 +4,14 @@ import { getCollection } from 'astro:content';
 
 const przemyslenia = (await getCollection('przemyslenia')).map(p => ({ ...p, topic: 'przemyślenia' }));
 const kod = (await getCollection('kod')).map(p => ({ ...p, topic: 'kod' }));
+const recenzje = (await getCollection('recenzje')).map(p => ({ ...p, topic: 'recenzje' }));
 
-const posts = [...przemyslenia, ...kod].sort(
+let tworczosc: any[] = [];
+try {
+  tworczosc = (await getCollection('tworczosc')).map(p => ({ ...p, topic: 'twórczość' }));
+} catch (e) {}
+
+const posts = [...przemyslenia, ...kod, ...recenzje, ...tworczosc].sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
 ---
