@@ -24,6 +24,7 @@ const backLabel = lang === 'en' ? '← back' : '← wróć';
 ---
 
 <BaseLayout title={title} lang={lang}>
+  <div class="reading-progress" id="reading-progress"></div>
   <article class="post" lang={lang}>
     <header class="post-header">
       <div class="post-meta">
@@ -50,7 +51,34 @@ const backLabel = lang === 'en' ? '← back' : '← wróć';
   </article>
 </BaseLayout>
 
+<script>
+  const progressBar = document.getElementById('reading-progress');
+
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    if (progressBar) {
+      progressBar.style.width = `${progress}%`;
+    }
+  }
+
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  updateProgress();
+</script>
+
 <style>
+  .reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--brand-color), var(--brand-color-dark));
+    z-index: 1000;
+    transition: width 0.1s ease-out;
+  }
+
   .post {
     padding: 1rem 0;
   }
@@ -62,10 +90,11 @@ const backLabel = lang === 'en' ? '← back' : '← wróć';
   .post-meta {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
     font-size: 0.85rem;
     color: var(--grey-color);
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
   }
 
   .post-topic {
@@ -101,20 +130,32 @@ const backLabel = lang === 'en' ? '← back' : '← wróć';
   }
 
   .post-title {
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 2rem;
+    font-family: var(--heading-font-family);
+    font-size: 2.2rem;
     font-weight: 400;
     line-height: 1.25;
     margin: 0;
     color: var(--text-color);
+    text-align: center;
+  }
+
+  .post-header::after {
+    content: "❧";
+    display: block;
+    text-align: center;
+    margin-top: 1.25rem;
+    color: var(--brand-color);
+    font-size: 1.2rem;
+    opacity: 0.6;
   }
 
   .post-author {
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.1rem;
+    font-family: var(--heading-font-family);
+    font-size: 1rem;
     font-style: italic;
     color: var(--grey-color);
-    margin: 0.5rem 0 0 0;
+    margin: 0.75rem 0 0 0;
+    text-align: center;
   }
 
   .post-content {
@@ -130,10 +171,14 @@ const backLabel = lang === 'en' ? '← back' : '← wróć';
     font-size: 0.9rem;
     color: var(--grey-color);
     text-decoration: none;
+    transition: all 0.15s ease;
+    padding: 0.35rem 0.75rem;
+    border-radius: 3px;
   }
 
   .back-link:hover {
     color: var(--brand-color);
+    background: rgba(139, 64, 73, 0.08);
   }
 
   @media screen and (max-width: 600px) {

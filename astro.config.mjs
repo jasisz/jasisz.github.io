@@ -9,7 +9,7 @@ export default defineConfig({
   trailingSlash: 'never',
   markdown: {
     shikiConfig: {
-      theme: 'github-light'
+      theme: 'github-dark'
     }
   }
 });
