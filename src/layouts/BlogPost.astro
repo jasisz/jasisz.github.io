@@ -84,7 +84,27 @@ const backLabel = lang === 'en' ? '← back' : '← wróć';
   }
 
   .post-header {
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    position: relative;
+  }
+
+  .post-header::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      var(--grey-color-light) 0%,
+      var(--grey-color-light) 42%,
+      transparent 42%,
+      transparent 58%,
+      var(--grey-color-light) 58%,
+      var(--grey-color-light) 100%
+    );
   }
 
   .post-meta {
@@ -141,12 +161,12 @@ const backLabel = lang === 'en' ? '← back' : '← wróć';
 
   .post-header::after {
     content: "❧";
-    display: block;
-    text-align: center;
-    margin-top: 1.25rem;
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
     color: var(--brand-color);
-    font-size: 1.2rem;
-    opacity: 0.6;
+    font-size: 1.1rem;
   }
 
   .post-author {
