@@ -184,7 +184,37 @@ const backLabel = lang === 'en' ? '← back' : '← wróć';
 
   .post-footer {
     padding-top: 1.5rem;
-    border-top: 1px solid var(--grey-color-light);
+    position: relative;
+  }
+
+  .post-footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      var(--grey-color-light) 0%,
+      var(--grey-color-light) 42%,
+      transparent 42%,
+      transparent 58%,
+      var(--grey-color-light) 58%,
+      var(--grey-color-light) 100%
+    );
+  }
+
+  .post-footer::after {
+    content: "❧";
+    position: absolute;
+    top: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--brand-color);
+    font-size: 1.1rem;
+    background: var(--background-color);
+    padding: 0 0.3rem;
   }
 
   .back-link {
