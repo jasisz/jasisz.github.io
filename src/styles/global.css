@@ -122,6 +122,20 @@ a:hover {
   text-underline-offset: 2px;
 }
 
+/* Links in text content - more visible */
+.post-content a,
+.page-content p a {
+  text-decoration: underline;
+  text-decoration-color: rgba(139, 64, 73, 0.4);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.post-content a:hover,
+.page-content p a:hover {
+  text-decoration-color: var(--brand-color-dark);
+}
+
 /* ==========================================================================
    4. Code & Blockquotes
    ========================================================================== */
