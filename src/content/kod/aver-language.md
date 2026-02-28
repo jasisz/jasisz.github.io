@@ -144,3 +144,5 @@ fn main() -> Unit
     thisProgram = CodeReview(hasVerify = true, hasIntent = true)
     reviewAndReport(thisProgram)
 ```
+
+I built Aver's interpreter in Rust using Claude. I cannot verify all the Rust it wrote. If it had written it in Aver, maybe I could.
