@@ -80,6 +80,8 @@ Aver is not for writing, it is for reading.
 
 There are emergent properties of the language, which I didn't expect at a first glance, but now I love.
 
+I know most of these properties come for free in any purely functional language - that's the point. The question was never whether pure FP enables them, but whether a language designed around verifiability would converge on pure FP. It did.
+
 You may export headers of all the functions in a module (and modules it uses) to a simple json or markdown. It is like documentation for AI, saves tokens.
 
 You may export and query decisions only.
