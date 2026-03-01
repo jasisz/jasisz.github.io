@@ -3,6 +3,7 @@ import { defineCollection, z } from 'astro:content';
 const baseSchema = z.object({
   title: z.string(),
   date: z.coerce.date(),
+  updated: z.coerce.date().optional(),
   lang: z.enum(['pl', 'en']).optional().default('pl'),
   status: z.enum(['seed', 'growing', 'evergreen']).optional().default('evergreen'),
   description: z.string().optional(),

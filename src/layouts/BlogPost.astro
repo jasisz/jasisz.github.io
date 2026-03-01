@@ -4,14 +4,16 @@ import BaseLayout from './BaseLayout.astro';
 interface Props {
   title: string;
   date: Date;
+  updated?: Date;
   lang?: string;
   status?: 'seed' | 'growing' | 'evergreen';
   topic?: string;
   author?: string;
 }
 
-const { title, date, lang = 'pl', status = 'evergreen', topic, author } = Astro.props;
+const { title, date, updated, lang = 'pl', status = 'evergreen', topic, author } = Astro.props;
 const formattedDate = date.toISOString().split('T')[0];
+const formattedUpdated = updated ? updated.toISOString().split('T')[0] : null;
 
 const statusLabels = {
   pl: { seed: 'szkic', growing: 'w trakcie', evergreen: '' },
@@ -33,6 +35,12 @@ const backLabel = lang === 'en' ? '← back' : '← wróć';
         )}
         {topic && <span class="meta-sep">·</span>}
         <time class="post-date" datetime={date.toISOString()}>{formattedDate}</time>
+        {formattedUpdated && (
+          <>
+            <span class="meta-sep">·</span>
+            <span class="post-updated">{lang === 'en' ? 'updated' : 'zaktualizowano'} <time datetime={updated!.toISOString()}>{formattedUpdated}</time></span>
+          </>
+        )}
         {statusLabel && <span class="post-status">{statusLabel}</span>}
         {lang === 'en' && <span class="post-lang">EN</span>}
       </div>
@@ -132,6 +140,12 @@ const backLabel = lang === 'en' ? '← back' : '← wróć';
 
   .post-date {
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  .post-updated {
+    font-size: 0.8rem;
+    color: var(--grey-color);
+    font-style: italic;
   }
 
   .post-status {

@@ -1,6 +1,7 @@
 ---
 title: "Aver: a programming language to harness AI"
 date: 2026-02-28
+updated: 2026-03-01
 lang: en
 status: seed
 description: "I've built programming language I never want to write in, but I love how easy it is to verify"
@@ -92,15 +93,17 @@ It is really easy to verify that all matches are exhaustive.
 
 It is really easy to build a tail-call optimization because there are no mutations, no side effects in loops, and no exceptions that would break tail position. Match in tail position is the only branching, so the transform is straightforward.
 
-Auto-memoization just works. Everything is immutable and pure functions are marked as such simply by the absence of effects. The interpreter can decide what to cache on its own — no annotations needed.
+Auto-memoization just works. Everything is immutable and pure functions are marked as such simply by the absence of effects. The runtime can decide what to cache on its own — no annotations needed.
 
 Variable resolution is trivial. No closures means... no captured environments, every function sees globals and its own parameters, nothing else. Every variable has a fixed slot.
+
+Transpilation to Rust is surprisingly natural. No closures means no lifetime headaches. Immutable values map to owned data. Effects are erased (enforced only at the interpreter level). Match expressions stay match expressions. The language that was designed to be easy to verify turns out to be easy to compile, too.
 
 It feels so obvious, but it is not obvious at all.
 
 ## Let Aver speak for its own
 
-I know it all may think like an artistic project created by some lunatic. But check this, it works, pure Aver.
+I know it all may look like an artistic project created by some lunatic. But check this, it works, pure Aver.
 
 ```aver
 module TrustCheck
@@ -147,4 +150,4 @@ fn main() -> Unit
     reviewAndReport(thisProgram)
 ```
 
-I built Aver's interpreter in Rust using Claude. I cannot verify all the Rust it wrote. If it had written it in Aver, maybe I could.
+I built Aver's interpreter and transpiler in Rust using Claude and Codex. I cannot verify all the Rust they wrote. If they had written it in Aver, maybe I could.
