@@ -1,7 +1,7 @@
 ---
 title: "Aver: a programming language to harness AI"
 date: 2026-02-28
-updated: 2026-03-01
+updated: 2026-03-06
 lang: en
 status: seed
 description: "I've built programming language I never want to write in, but I love how easy it is to verify"
@@ -47,7 +47,7 @@ Do we need package managers? No, we can make AI write everything for us.
 
 Do we need nice imports with short names? No, we can use modules and full namespaces, which are reflected in the file system.
 
-Do we need documentation? No, we can make intent, descriptions, and decisions part of the syntax — code documents itself or it doesn't compile.
+Do we need documentation? No, we can make intent, descriptions, and decisions part of the syntax — code documents itself or it doesn't pass `aver check`.
 
 Is writing code in Aver easy? Hell no, at least not for me. But AI doesn't mind, AI says it is fun and explicit. It only asks me for closures, but doesn't mind and quickly adapts to the style.
 
@@ -71,9 +71,9 @@ I added `decision` blocks as part of the language. Why things were done that way
 One may argue those are just glorified comments, or ADRs living in the same file. Maybe they are, but you know what?
 The next reader reads them. If it is a human it makes it easier to understand. If it is an AI it works partially as prompt injection? Or maybe, in better words, written chain of thought.
 
-And I added effects. `! [Http, Console]` so you know that this function does HTTP calls and uses console.
-It is not just a comment, it is part of the signature. You cannot ignore it, and you cannot forget about it, because it is enforced by the parser and in runtime.
-Every function calling it has to have `! [Http, Console]` (or more) in its signature too. Tedious, repetitive, but you just need a single look. And AI is writing it, not you.
+And I added effects. `! [Http.get, Console.print]` so you know that this function does HTTP GET calls and prints to console.
+It is not just a comment, it is part of the signature. You cannot ignore it, and you cannot forget about it, because it is enforced by the checker and in runtime.
+Every function calling it has to have `! [Http.get, Console.print]` (or more) in its signature too. Tedious, repetitive, but you just need a single look. And AI is writing it, not you.
 
 Aver is not for writing, it is for reading.
 
@@ -87,7 +87,7 @@ You may export headers of all the functions in a module (and modules it uses) to
 
 You may export and query decisions only.
 
-You don't have verify blocks for effectful function, but you may record and replay all the effects. It is like a debugger, but for AI.
+Effectful functions aren't expected to rely on verify blocks, but you may record and replay their effects. The recommended path is record/replay — verify is primarily for pure functions.
 
 It is really easy to verify that all matches are exhaustive.
 
@@ -116,8 +116,8 @@ decision RequireVerification
     reason =
         "AI writes convincing code that may be subtly wrong."
         "Verify blocks make correctness visible, not assumed."
-    chosen = VerifyBlocks
-    rejected = [TrustByDefault, ManualReview]
+    chosen = "VerifyBlocks"
+    rejected = ["TrustByDefault", "ManualReview"]
     impacts = [canTrust]
 
 record CodeReview
@@ -139,13 +139,13 @@ verify canTrust
 
 fn reviewAndReport(review: CodeReview) -> Unit
     ? "Reviews code and reports the verdict."
-    ! [Console]
+    ! [Console.print]
     match canTrust(review)
         Result.Ok(msg) -> Console.print("PASS: {msg}")
         Result.Err(msg) -> Console.print("FAIL: {msg}")
 
 fn main() -> Unit
-    ! [Console]
+    ! [Console.print]
     thisProgram = CodeReview(hasVerify = true, hasIntent = true)
     reviewAndReport(thisProgram)
 ```
