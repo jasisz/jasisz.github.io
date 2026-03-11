@@ -107,8 +107,7 @@ I know it all may look like an artistic project created by some lunatic. But che
 
 ```aver
 module TrustCheck
-    intent =
-        "Decides whether to trust AI-generated code."
+    intent = "Decides whether to trust AI-generated code."
     exposes [canTrust]
 
 decision RequireVerification
